@@ -1,0 +1,15 @@
+</br><p>Hello <%= current_user.name %>, here are
+<% if !current_user.nil? && current_user == @user %>
+  your liked items:</p>
+<% else %>
+  this users (<%= @user.name%>'s) liked items:</p>
+<% end %></br>
+
+<% @l_items.each do |x| %>
+  <% cust_obj_info(Item.find_by(id: x.id), 'name', 'desc', 'value').each do |y| %>
+    <span><%= y %></span>
+  <% end %>
+  <% if @user == current_user %>
+    <%= button_to "dislike", Like.find_by(liked_item_id: x.id, user_id: @user.id), method: :delete %>
+  <% end %>
+<% end %>

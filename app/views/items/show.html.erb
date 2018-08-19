@@ -1,0 +1,21 @@
+</br>SHOWING <%= @item.name%> </br>
+<% show_item_info(@item).each do |x| %>
+  <%= x %></br>
+<% end %>
+
+
+</br>
+TEST
+</br>
+
+status: <%= "#{@item.requested} by:" %> </br>
+<%= link_to @item.user.name, user_path(@item.user) %>
+
+</br>
+<span>Liked by: <%= like_count(@item) %> users.</p>
+average rating: <%= l_item_rating(@item) %></span>
+</br>
+<% if current_user && @item.owner_id == current_user.id %>
+
+  </br><%= button_to "delete #{@item.name}", @item, method: :delete, data: { confirm: "click OK to confirm deletion of user" } %>
+ <% end %>

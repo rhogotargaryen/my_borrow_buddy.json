@@ -1,0 +1,7 @@
+<br>
+<% if !current_user %>
+    <p>Welcome to the Borrow Buddy Web App, I can see you have not signed in, please feel free to do so!</p>
+    <%= link_to 'signin', signin_path %>
+<% else %>
+    <p>Welcome to the Borrow Buddy App, thank you for joining us, a great place to start is <%= link_to 'your dashboard', user_items_path(current_user) %></p>
+<% end %>

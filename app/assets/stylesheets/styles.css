@@ -1,0 +1,74 @@
+body {
+    color: white;
+}
+
+#brand {
+  font-family: 'Indie Flower', cursive;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+#nav-bar {
+  height:10vh;
+  background-color:rgba(0,0,0,0.32);
+}
+
+.navitem {
+  margin-right:5px;
+  margin-left:5px;
+}
+
+a {
+  margin-right:5px;
+  margin-left:5px;
+  background-color:rgba(255,255,255,0.32);
+  padding:5px;
+  color:rgba(255,255,255,0.92);
+  
+}
+
+input[type="submit"] {
+     border:none; 
+     padding: 5px;
+     font: inherit;
+     /*border is optional*/
+     cursor: pointer;
+  margin-right:5px;
+  margin-left:5px;
+  background-color:rgba(255,255,255,0.32);
+  color:rgba(255,255,255,0.92);
+  
+}
+
+a, a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#main-content {
+  height:auto;
+  margin:5vh;
+  margin-right:10vh;
+  margin-left:10vh;
+  background-color:rgba(0,0,0,0.32);
+  justify-content: flex-start!important;
+  align-items: center!important;
+}
+
+.field_with_errors input[type='text']{
+  border: 1px solid red;
+}
+
+.field_with_errors input[type='number']{
+  border: 1px solid red;
+}
+
+.field_with_errors textarea {
+  border: 1px solid red;
+}
+
+.button_to {
+  display: inline;
+
+}
+

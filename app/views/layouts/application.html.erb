@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <%= stylesheet_link_tag "styles" %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>borrow buddy</title>
+
+</head>
+
+<body style="background-color:rgba(105,90,37,0.43);">
+    <div class="d-flex justify-content-between align-items-center" id="nav-bar">
+        <div id="brand" class="navitem">
+            <span><a href="<%= root_path %>">My Borrow Buddy</a></span>
+        </div>
+        <div id="nav-links" class="navitem"><%= link_to "Users", users_path, class: "navlink" %><%= link_to "Items", items_path, class: "navlink" %>
+            <% if current_user %>
+                <%= link_to "Your Dashboard", user_items_path(current_user), class: "navlink" %>
+            <% end %>
+        </div>
+        <% if !current_user %>
+        <div id="sesion-links" class="navitem"><%= link_to "Sign In", signin_path, class: "navlink" %><%= link_to "Sign Up", new_user_path, class: "navlink" %></div>
+        <% else %>
+        <div id="sesion-links" class="navitem"><%= link_to "Sign Out", signout_path, class: "navlink" %></div>
+        <% end %>
+    </div>
+    <div class="d-flex flex-column" id="main-content"><%= yield %></div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+
+</br>
+ <% if params[:message] %>
+    <p><%= params[:message] %> click <%= link_to "here", signout_path %> to sign out</p>
+    
+ <% end %>
+
+User Info:
+<ul>
+<% show_obj_info(@user).each do |x| %>
+ <li><%= x %></li>
+<% end %>
+</ul>
+
+Items:</br></br>
+<ul>
+    <% Item.owned_by(@user.id).each do |x| %>
+    <li><%= link_to "#{x.name}", item_path(x)%></li></br>
+    <% end %>
+</ul>
+
+</br>
+<% if @user == current_user %>
+    <%= button_to "delete user", @user, method: :delete, data: { confirm: "click OK to confirm deletion of user" } %>
+<% end %>

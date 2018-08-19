@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  recipient_id: 1
+  sender_id: MyString
+  item_id: 1
+  date_of_return: 2018-06-02 07:24:47
+  settled: false
+
+two:
+  category: MyString
+  recipient_id: 1
+  sender_id: MyString
+  item_id: 1
+  date_of_return: 2018-06-02 07:24:47
+  settled: false

@@ -1,0 +1,5 @@
+<% if @item.errors %>
+  <% @item.errors.messages.each do |x, v| %>
+  <%= "#{x}: #{v[0]}" %></br>
+  <% end %>
+<% end %>

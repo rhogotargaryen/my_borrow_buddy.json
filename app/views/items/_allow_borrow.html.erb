@@ -1,0 +1,5 @@
+  <% @o_items.allow_borrow.map do |x| %>
+    <% if x.owner_id == current_user.id %>
+      <%= button_to "allow borrow  #{x.name}", new_item_transaction_path(x), params: { category: "allow_borrow", recipient_id: x.id_recipient } %></br>
+    <% end %>
+  <% end %>

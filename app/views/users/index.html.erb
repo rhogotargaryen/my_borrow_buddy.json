@@ -1,0 +1,7 @@
+<%= params[:message] if params[:message] %>
+
+</br>
+<p>INDEXING ALL USERS:</p>
+<% @users.all.each do  |x| %>
+  <%= link_to x.name, user_path(x) %> </br>
+<% end %>

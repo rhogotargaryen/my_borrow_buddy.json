@@ -1,0 +1,9 @@
+<%= form_for(@user, :url => signin_path) do |f| %>
+  <%= f.label :name %></br>
+  <%= f.text_field :name %></br>
+  <%= f.label :password %></br>
+  <%= f.password_field :password %></br>
+  <%= f.submit 'Sign-in' %></br>
+<% end %>
+
+</br><%= link_to 'or log in with facebook', 'auth/facebook' %>

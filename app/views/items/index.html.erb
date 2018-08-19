@@ -1,0 +1,62 @@
+<% if params[:message] %>
+  <p><%= params[:message]  %></p>
+<% end %>
+</br>
+ <% if current_user %>
+   Hello, <%= current_user.name %> 
+   would you like to <%= link_to "create an item?", new_item_path, class: "navlink" %> 
+ <% else %>
+     please <%= link_to 'log in', signin_path %>
+ <% end %>
+</br>   
+  
+
+<p>INDEXING ALL <%= "#{@user.name}'s" if @user %> ITEMS: </p>
+<% @items.each do |x| %>
+  </br>
+  <span><%= link_to "#{x.name}", item_path(x) %>
+  <% if !current_user.nil? %>
+    <% if !liked_already?(x) %>
+     <%= button_to "like this item", liked_items_path, params: { id: x.id }, class: 'sub_but' %>
+    <% else %>
+      you liked this item 
+        <% if has_rating?(current_user, x) %>
+          and rated it!
+        <% else %>
+          now <%= link_to "rate it", edit_like_path(find_like(current_user, x)) %>
+        <% end %>
+    <% end %>
+    <% if x.owner_id == current_user.id %>
+        / <%= link_to "edit item", edit_item_path(x) %>
+    <%end%></span>
+  <% end %></br>
+<% end %> 
+</br>
+
+<% if current_user %>
+  <p>Borrowable Items:</p>
+    <%= render'borrowable_items', al_items: Item.all %>
+<% end %>
+ 
+<% if @user && @user == current_user %> 
+  </br>
+    <p>Items allowed to borrow:</p>
+    
+  <%= render 'allow_borrow' %>
+  
+  <p>Items borrowed to be returned:</p>
+
+  <%= render 'returnable_items' %>
+  
+  <p>Accept a return of your borrowed out item:</p></br>
+  
+  <%= render 'allow_return' %>
+  
+<p>These are your items out on loan:</p>
+  <% @o_items.borrowed.map do |x| %>
+    </br><span><%= link_to "#{x.name}", item_path(x) %>: borrowed by: <%= link_to "#{x.borrower.name}", user_path(x.borrower) %></span>
+  <% end %>
+ </br>
+ <p>____________________________</p>
+ <p><%= link_to "Click Here to view your liked items", user_liked_items_url(@user) %></p>
+<% end %>    

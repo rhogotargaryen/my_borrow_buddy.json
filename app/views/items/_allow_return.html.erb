@@ -1,0 +1,5 @@
+
+
+  <% @o_items.allow_return.map do |x| %>
+    <%= button_to "allow return #{x.name}", new_item_transaction_path(x),  params: { category: "allow_return", recipient_id: x.id_recipient } %>
+  <% end %>

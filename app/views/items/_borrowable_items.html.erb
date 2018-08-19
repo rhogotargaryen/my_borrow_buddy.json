@@ -1,0 +1,5 @@
+  <% al_items.borrowable.map  do |x|%>
+    <% if x.user_id != current_user.id  %>
+      <%= button_to "request borrow #{x.name}", new_item_transaction_path(x), params: { category: "submit_borrow" } %>
+    <% end %>
+  <% end %>

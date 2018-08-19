@@ -1,0 +1,6 @@
+</br>
+<%= form_for(@like) do |f| %>
+  <%= f.label :rating %>
+  <%= f.select :rating, (0..5) %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,14 @@
+TEST
+<%if @testing %>
+<%= @testing.name %>
+    <% if session[:user_id] %>
+    <%= link_to 'Sign-out', signout_path %>
+    <% end %>
+<% else %>
+   NO ONE IS SIGNED IN
+<% end %>
+
+
+
+
+</bt><%= link_to 'signin', signin_url %>

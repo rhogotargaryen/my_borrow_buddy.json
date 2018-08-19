@@ -1,0 +1,12 @@
+
+<h3>Create a User/Sign Up</h3>
+
+
+<% if @user.errors %>
+  <% @user.errors.messages.each do |x, v| %>
+  <%= "#{x}: #{v[0]}" %></br>
+  <% end %>
+<% end %>
+
+ 
+<%= render 'form' %>
