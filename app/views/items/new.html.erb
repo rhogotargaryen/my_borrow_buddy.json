@@ -3,7 +3,7 @@ CREATE ITEM
 </br><%= render 'errors' %>
 
 
-<%= form_for(@item) do |f| %>
+<%= form_for(@item, {id: 'new_item_form'}) do |f| %>
   <%= f.label :name %></br>
   <%= f.text_field :name %></br>
   <%= f.label :desc %></br>
@@ -12,3 +12,15 @@ CREATE ITEM
   <%= f.number_field :value %></br>
   <%= f.submit %>
 <% end %>
+
+<div id='item_container'></div>
+
+<script id="item-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <h1>{{name}}</h1></br>
+    <h3>{{desc}}></h3></br>
+    <p>{{value}}</p>></br>
+    <hr>
+  {{/each}}
+
+</script>
