@@ -2,12 +2,13 @@
   <p><%= params[:message]  %></p>
 <% end %>
 </br>
- <% if current_user %>
-   Hello, <%= current_user.name %> 
-   would you like to <span id='new_item_form_container'><%= link_to "create an item?", new_item_path, { id: 'create_item', class: "navlink" } %></span> 
+<div id-'link-wrap'> <% if current_user %>
+   <span id='link-text-del'>Hello, <%= current_user.name %> 
+   would you like to </span><span id='new_item_form_container'><%= link_to "create an item?", new_item_path, { id: 'create_item', class: "navlink" } %></span> 
  <% else %>
      please <%= link_to 'log in', signin_path %>
  <% end %>
+</div>
 </br>   
   
 

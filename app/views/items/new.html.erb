@@ -1,6 +1,6 @@
-<span>CREATE ITEM</span>
 <%= render 'errors' %>
 <div id='new_item_form_container'>
+<span id='title-delete'>CREATE ITEM</span>
 <%= form_for(@item, {id: 'new_item_form'}) do |f| %>
   <%= f.label :name %></br>
   <%= f.text_field :name %></br>

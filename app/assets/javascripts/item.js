@@ -12,18 +12,21 @@ $(function() {
     })
     $('a#create_item').click((e) => {
         e.preventDefault()
+        var wrap = $('#create_item').detach()
         $.get('/items/new', (data) => {
-            $('#new_item_form_container').append(data)
-            $('#create_item').html('<a href="#/" class="navlink" id="detach_item_form">detach new item form</a>')
-        }).then(()=> {    
-            $("#detach_item_form").click((e) => {
+            $('#link-text-del').text('')
+            $('#new_item_form_container').prepend(data)
+            $('#create_item').detach()
+            $('#main-content').prepend('<a href="#/" class="navlink" id="detach_item_form">detach new item form</a>')
+        $("#detach_item_form").click((e) => {
             e.preventDefault()
-            $('#new_item_form_container').html('<a id="create_item" class="navlink" href="/items/new">create an item?</a>')
-            })
-        })
+            $('form#new_item').detach()
+            $('#title-delete').detach()
+            $('a#detach_item_form.navlink').detach()
+            $('#main-content').prepend(wrap)
+        })            
+      })   
     })
 })
 
 
-
-$(e)[0].target.detach()
