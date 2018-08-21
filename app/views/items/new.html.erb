@@ -1,8 +1,6 @@
-CREATE ITEM
-
-</br><%= render 'errors' %>
-
-
+<span>CREATE ITEM</span>
+<%= render 'errors' %>
+<div id='new_item_form_container'>
 <%= form_for(@item, {id: 'new_item_form'}) do |f| %>
   <%= f.label :name %></br>
   <%= f.text_field :name %></br>
@@ -10,17 +8,15 @@ CREATE ITEM
   <%= f.text_area :desc %></br>
   <%= f.label :value %></br>
   <%= f.number_field :value %></br>
-  <%= f.submit %>
+  <%= f.submit id: :nu_item, data: { disable_with: false }%>
 <% end %>
+</div>
 
-<div id='item_container'></div>
+<span id='item_container'></span>
 
-<script id="item-template" type="text/x-handlebars-template">
-  {{#each this}}
-    <h1>{{name}}</h1></br>
-    <h3>{{desc}}></h3></br>
-    <p>{{value}}</p>></br>
-    <hr>
-  {{/each}}
-
+<script id="item_template" type="text/x-handlebars-template">
+    <h1>Item Name: {{name}}</h1>
+    <h3>Description: {{desc}}</h3>
+    <p>Value: {{value}}</p>
+    <%= link_to "{{name}}'s details page", "/items/{{id}}" %></br><br>
 </script>

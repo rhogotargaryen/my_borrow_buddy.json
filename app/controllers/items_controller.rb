@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    render layout: false
   end
 
   def create
@@ -28,7 +29,10 @@ class ItemsController < ApplicationController
     if @item.save
       @item.transactions << Transaction.new(category: 'add_item', recipient_id: current_user.id)
       LikedItem.create(item_id: @item.id)
-      redirect_to item_url(@item)
+      respond_to do |format|
+        format.html { redirect_to item_url(@item) }
+        format.json { render json: @item }
+      end
     else
       @messages = @item.errors
       render :new
@@ -62,7 +66,7 @@ class ItemsController < ApplicationController
   end
 
   private
-
+  
   def item_params
     params.require(:item).permit(:name, :value, :desc)
   end

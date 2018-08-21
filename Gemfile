@@ -30,9 +30,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'omniauth'
-
+gem 'active_model_serializers'
 gem 'omniauth-facebook'
-
+gem 'handlebars_assets'
 gem 'dotenv-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
