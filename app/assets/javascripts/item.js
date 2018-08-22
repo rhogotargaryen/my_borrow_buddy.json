@@ -2,11 +2,19 @@
 
 $(function() {
     
+    $("#index-click").click((e) => {
+        $.get('/items', (data) => {
+            var template = Handlebars.compile($('#item_index_template').html())
+            var added_items = template(data)
+            $('#index-item-container').prepend(added_items)
+        }, 'json')
+    })
+    
     $('#new_item_form_container').submit(function(e) {
         e.preventDefault()
-        let template = Handlebars.compile($('#item_template').html())
+        var template = Handlebars.compile($('#item_template').html())
         $.post('/items', $('form#new_item').serialize(), (data) => {
-            let added_item = template(data)
+            var added_item = template(data)
             $('#item_container').append(added_item)
         }, 'json')
     })

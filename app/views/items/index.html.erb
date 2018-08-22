@@ -10,28 +10,31 @@
  <% end %>
 </div>
 </br>   
-  
 
-<p>INDEXING ALL <%= "#{@user.name}'s" if @user %> ITEMS: </p>
-<% @items.each do |x| %>
-  </br>
-  <span><%= link_to "#{x.name}", item_path(x) %>
-  <% if !current_user.nil? %>
-    <% if !liked_already?(x) %>
-     <%= button_to "like this item", liked_items_path, params: { id: x.id }, class: 'sub_but' %>
-    <% else %>
-      you liked this item 
-        <% if has_rating?(current_user, x) %>
-          and rated it!
-        <% else %>
-          now <%= link_to "rate it", edit_like_path(find_like(current_user, x)) %>
-        <% end %>
-    <% end %>
-    <% if x.owner_id == current_user.id %>
-        / <%= link_to "edit item", edit_item_path(x) %>
-    <%end%></span>
-  <% end %></br>
-<% end %> 
+
+<% if request.env['PATH_INFO'] == '/items' %>
+  <% @items.each do |x| %>
+    </br>
+    <span><%= link_to "#{x.name}", item_path(x) %>
+    <% if !!current_user %>
+      <% if !liked_already?(x) %>
+       <%= link_to "like this item", liked_items_path, params: { id: x.id }, class: 'sub_but' %>
+      <% else %>
+        you liked this item 
+          <% if has_rating?(current_user, x) %>
+            and rated it!
+          <% else %>
+            now <%= link_to "rate it", edit_like_path(find_like(current_user, x)) %>
+          <% end %>
+      <% end %>
+      <% if x.owner_id == current_user.id %>
+          / <%= link_to "edit item", edit_item_path(x) %>
+      <%end%></span>
+    <% end %></br>
+  <% end %>
+  <% else %>
+    <span id='index-item-container'><a href='#/' id='index-click'>click to index ALL of <%= "#{@user.name}'s" if @user %> ITEMS: </a></span>
+<% end %>
 </br>
 
 <% if current_user %>
@@ -61,3 +64,15 @@
  <p>____________________________</p>
  <p><%= link_to "Click Here to view your liked items", user_liked_items_url(@user) %></p>
 <% end %>    
+
+
+
+
+    
+<script id="item_index_template" type="text/x-handlebars-template">
+{{#each this}}
+  <div><a href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
+     <a params="{ :id=> {{id}} }" class="sub_but" rel="nofollow" href="#/">like this item</a> / <a href="/items/{{id}}/edit">edit item</a>
+  </div></br>
+{{/each}}
+</script>

@@ -15,8 +15,7 @@
 <span id='item_container'></span>
 
 <script id="item_template" type="text/x-handlebars-template">
-    <h1>Item Name: {{name}}</h1>
-    <h3>Description: {{desc}}</h3>
-    <p>Value: {{value}}</p>
-    <%= link_to "{{name}}'s details page", "/items/{{id}}" %></br><br>
+  <div><a href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
+     <a params="{ :id=> {{id}} }" class="sub_but" rel="nofollow" href="#/">like this item</a> / <a href="/items/{{id}}/edit">edit item</a>
+  </div></br>
 </script>

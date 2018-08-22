@@ -14,6 +14,10 @@ class ItemsController < ApplicationController
     else
       @items = Item.all
     end
+    respond_to do |format|
+      format.html {render :index}
+      format.json { render json: @items }
+    end
   end
 
   def new
@@ -35,7 +39,7 @@ class ItemsController < ApplicationController
       end
     else
       @messages = @item.errors
-      render :new
+      render :new, layout: false
     end
   end
 
