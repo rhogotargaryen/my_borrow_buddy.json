@@ -2,7 +2,7 @@
   <p><%= params[:message]  %></p>
 <% end %>
 </br>
-<div id-'link-wrap'> <% if current_user %>
+<div id='link-wrap'> <% if current_user %>
    <span id='link-text-del'>Hello, <%= current_user.name %> 
    would you like to </span><span id='new_item_form_container'><%= link_to "create an item?", new_item_path, { id: 'create_item', class: "navlink" } %></span> 
  <% else %>
@@ -71,7 +71,7 @@
     
 <script id="item_index_template" type="text/x-handlebars-template">
 {{#each this}}
-  <div><a href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
+  <div><a class="index_item" data-id="{{id}}" href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
      <a params="{ :id=> {{id}} }" class="sub_but" rel="nofollow" href="#/">like this item</a> / <a href="/items/{{id}}/edit">edit item</a>
   </div></br>
 {{/each}}

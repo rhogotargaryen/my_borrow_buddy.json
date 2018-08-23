@@ -45,6 +45,9 @@ class ItemsController < ApplicationController
 
   def show
     set_item
+    if request.env['PATH_INFO'].include?('user')
+      render :show, layout: false
+    end
     redirect_to items_path(message: 'item not found') if @item.nil?
   end
 

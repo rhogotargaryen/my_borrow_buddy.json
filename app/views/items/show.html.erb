@@ -17,5 +17,5 @@ average rating: <%= l_item_rating(@item) %></span>
 </br>
 <% if current_user && @item.owner_id == current_user.id %>
 
-  </br><%= button_to "delete #{@item.name}", @item, method: :delete, data: { confirm: "click OK to confirm deletion of user" } %>
+  </br><%= button_to "delete #{@item.name}", @item, method: :delete, data: { confirm: "click OK to confirm deletion of item" } %>
  <% end %>

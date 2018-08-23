@@ -15,7 +15,7 @@
 <span id='item_container'></span>
 
 <script id="item_template" type="text/x-handlebars-template">
-  <div><a href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
+  <div><a class="index_item" data-id="{{id}}" href="/items/{{id}}"><strong>Item Name: {{name}}</strong></a>
      <a params="{ :id=> {{id}} }" class="sub_but" rel="nofollow" href="#/">like this item</a> / <a href="/items/{{id}}/edit">edit item</a>
   </div></br>
 </script>
