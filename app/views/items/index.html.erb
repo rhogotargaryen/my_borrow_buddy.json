@@ -34,7 +34,7 @@
     <% end %></br>
   <% end %>
   <% else %>
-  <span id='index-item-container'><a href='#/' id='index-click'>click to index ALL of <%= "#{@user.name}'s" if @user %> ITEMS: </a></span>
+  <span id='index-item-container'><a href='#/' id='index-click' data-user_id="<%= current_user.id %>">click to index ALL of <%= "#{@user.name}'s" if @user %> ITEMS: </a></span>
 <% end %>
 </br>
 

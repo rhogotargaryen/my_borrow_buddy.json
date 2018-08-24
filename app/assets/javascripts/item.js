@@ -14,13 +14,13 @@ class Item {
 $(function() {
     
     $("#index-click").click((e) => {
-        $.get('/items', (data) => {
+        $.get('/items', e.target.dataset, (data) => {
             var template = Handlebars.compile($('#item_index_template').html())
             var added_items = template(data)
             $('#index-click').detach()
             $('#index-item-container').prepend(added_items)
         }, 'json').done(() => {
-            $('#index-item-container').on('click', 'a', (e) => {
+            $('#index-item-container').click((e) => {
                 e.preventDefault()
                 if(e.target.tagName == "STRONG") {
                     $.get(`items/${e.target.parentElement.dataset.id}`, (data) => {
@@ -37,7 +37,6 @@ $(function() {
             })            
         })
     })
-    
     $('#create_item').click((e) => {
         e.preventDefault()
         $.get('/items/new', (data) => {

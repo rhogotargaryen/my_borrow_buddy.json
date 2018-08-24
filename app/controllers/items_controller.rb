@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   skip_before_action :logged_and_owns_item, only: %i[index show new create]
 
   def index
-    if params[:user_id]
+    if params[:user_id] || request.format.symbol == :json
       @user = User.find_by(id: params[:user_id])
       @items = @user.items
       @o_items = Item.owned_by(@user.id)
@@ -15,8 +15,8 @@ class ItemsController < ApplicationController
       @items = Item.all
     end
     respond_to do |format|
-      format.html {render :index}
-      format.json { render json: @items }
+      format.html { render :index }
+      format.json { render json: @o_items }
     end
   end
 
