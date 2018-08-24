@@ -2,6 +2,26 @@
 
 </br>
 <p>INDEXING ALL USERS:</p>
+ <span id="user-container">
 <% @users.all.each do  |x| %>
-  <%= link_to x.name, user_path(x) %> </br>
+<p><%= link_to x.name, user_path(x) %> // <%= link_to "see what items this user likes", user_path(x), class: "view_items_liked", data: { id: x.id } %></p>
 <% end %>
+ </span></br>
+
+
+<script>
+    
+    
+    $(() => {
+        $(".view_items_liked").on('click', (e) => {
+            e.preventDefault()
+
+            $.get(e.currentTarget.href, (data) => {
+                $('#user-container').append(`<p><strong>${data.name}<strong> likes:</p>`)
+                data.liked_items.forEach((item) => {
+	            $('#user-container').append(`<p>${item.item_name}</p>`)})
+            })
+        })
+    })
+    
+</script>

@@ -4,7 +4,10 @@ class Item {
         this.desc = json.desc
         this.value = json.value
         this.name = json.name
-        this.new_item_template = Handlebars.compile($('#item_template').html())
+    }
+    new_item_template() {
+        var a =Handlebars.compile($('#item_template').html())
+        return a(this)
     }
 }
 
@@ -47,7 +50,7 @@ $(function() {
                 var template = Handlebars.compile($('#item_template').html())
                 $.post('/items', $('form#new_item').serialize(), (data) => {
                     var b = new Item(data)
-                    var added_item = b.new_item_template(b)
+                    var added_item = b.new_item_template()
                     $('#index-item-container').prepend(added_item)
                     $('#detach_item_form').replaceWith(e.data)
                     $('#new_item_form_container').children().remove()
@@ -65,8 +68,15 @@ $(function() {
         })            
       })   
     })
-    $('#show_user_likes').click((e) => {
-        debugger
+    $('#view_liked_items').click((e) => {
+        e.preventDefault()
+        $.get(e.target.href, (data) => {
+            data.map((item) => {
+                var d = new Item(item)
+                $('#liked_items_container').append(`<p>you liked ${d.name}</p>`)
+                e.target.remove()
+            })
+        }, 'json')
     })
 })
 

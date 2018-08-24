@@ -11,5 +11,10 @@ class LikedItemsController < ApplicationController
     @l_items = @user.liked_items.map do |x|
       Item.find_by(id: x.id)
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @l_items }
+    end
   end
+  
 end

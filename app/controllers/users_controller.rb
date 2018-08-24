@@ -24,6 +24,10 @@ class UsersController < ApplicationController
 
   def show
     redirect_to users_path(message: 'user not found') if @user.nil?
+    respond_to do |format|
+      format.json { render json: @user }
+      format.html {}
+    end
   end
 
   def edit; end

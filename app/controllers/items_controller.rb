@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
     @item.requested = 'added_item'
     if @item.save
       @item.transactions << Transaction.new(category: 'add_item', recipient_id: current_user.id)
-      LikedItem.create(item_id: @item.id)
+      LikedItem.create(item_id: @item.id, item_name: @item.name)
       respond_to do |format|
         format.html { redirect_to item_url(@item) }
         format.json { render json: @item }

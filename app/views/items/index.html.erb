@@ -61,9 +61,9 @@
   <% @o_items.borrowed.map do |x| %>
     </br><span><%= link_to "#{x.name}", item_path(x) %>: borrowed by: <%= link_to "#{x.borrower.name}", user_path(x.borrower) %></span>
   <% end %>
- </br>
  <p>____________________________</p>
- <p><%= link_to "Click Here to view your liked items", user_liked_items_url(@user) %></p>
+ <div id='liked_items_container'><%= link_to "Click Here to view your liked items", user_liked_items_url(@user), id: "view_liked_items", data: { id: current_user.id } %></div>
+ </br>
 <% end %>    
 
 

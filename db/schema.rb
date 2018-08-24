@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_07_09_061933) do
 
   create_table "liked_items", force: :cascade do |t|
     t.integer "item_id"
+    t.string "item_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
