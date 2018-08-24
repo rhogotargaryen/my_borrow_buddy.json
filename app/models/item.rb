@@ -3,7 +3,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_many :transactions
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :desc, presence: true
   validates :value, presence: true
 

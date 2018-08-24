@@ -13,12 +13,13 @@
 
 
 <% if request.env['PATH_INFO'] == '/items' %>
+  <span id='index-item-container'></span>
   <% @items.each do |x| %>
     </br>
     <span><%= link_to "#{x.name}", item_path(x) %>
     <% if !!current_user %>
       <% if !liked_already?(x) %>
-       <%= link_to "like this item", liked_items_path, params: { id: x.id }, class: 'sub_but' %>
+       <%= button_to "like this item", liked_items_path, params: { id: x.id }, class: 'sub_but', method: 'POST' %>
       <% else %>
         you liked this item 
           <% if has_rating?(current_user, x) %>
@@ -33,7 +34,7 @@
     <% end %></br>
   <% end %>
   <% else %>
-    <span id='index-item-container'><a href='#/' id='index-click'>click to index ALL of <%= "#{@user.name}'s" if @user %> ITEMS: </a></span>
+  <span id='index-item-container'><a href='#/' id='index-click'>click to index ALL of <%= "#{@user.name}'s" if @user %> ITEMS: </a></span>
 <% end %>
 </br>
 

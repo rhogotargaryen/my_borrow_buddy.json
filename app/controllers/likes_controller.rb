@@ -16,4 +16,5 @@ class LikesController < ApplicationController
     @like.destroy
     redirect_to items_path
   end
+  
 end

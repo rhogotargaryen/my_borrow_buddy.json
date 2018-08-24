@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :items, only: %i[show index] do
     resources :transactions, only: %i[new index]
   end
-
+  resources :liked_items, only: [:create, :index]
   resources :users
 
   resources :users, only: %i[show index] do
@@ -15,9 +15,7 @@ Rails.application.routes.draw do
     resources :liked_items, only: :index
   end
 
-  resources :liked_items, only: %i[create show]
-
-  resources :transactions, oly: :show
+  resources :transactions, only: :show
 
   resources :likes, only: %i[edit update show destroy]
 

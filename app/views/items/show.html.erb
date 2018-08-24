@@ -12,7 +12,7 @@ status: <%= "#{@item.requested} by:" %> </br>
 <%= link_to @item.user.name, user_path(@item.user) %>
 
 </br>
-<span>Liked by: <%= like_count(@item) %> users.</p>
+<span><a id='show_user_likes' href="#/">Liked by: <%= like_count(@item) %> users.</a>
 average rating: <%= l_item_rating(@item) %></span>
 </br>
 <% if current_user && @item.owner_id == current_user.id %>
