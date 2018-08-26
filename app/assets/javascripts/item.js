@@ -9,23 +9,28 @@ class Item {
         var a =Handlebars.compile($('#item_template').html())
         return a(this)
     }
+    
 }
+
+Item.make_index_link = (e) => {
+        $.get(`items/${e.target.parentElement.dataset.id}`, (data) => {
+         if($('#detach_item_form')[0]){
+             $('#detach_item_form').click()
+         }
+         var a = $('#link-wrap')
+         var b = $('a#create_item').detach()
+         $('#link-text-del').remove
+         $('#link-wrap').html(`</br>${data}`)
+         $('#main-content').prepend(b)
+        })             
+    }
 
 $(function() {
     
     $('#index-item-container').click((e) => {
         e.preventDefault()
         if(e.target.tagName == "STRONG") {
-            $.get(`items/${e.target.parentElement.dataset.id}`, (data) => {
-                if($('#detach_item_form')[0]){
-                    $('#detach_item_form').click()
-                }
-                var a = $('#link-wrap')
-                var b = $('a#create_item').detach()
-                $('#link-text-del').remove
-                $('#link-wrap').html(`</br>${data}`)
-                $('#main-content').prepend(b)
-            })                    
+            Item.make_index_link(e)
         }
     })   
     
