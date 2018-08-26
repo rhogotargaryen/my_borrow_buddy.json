@@ -8,6 +8,7 @@
 <% end %>
  </span></br>
 
+ <span id="cont_user_likes"></span>
 
 <script>
     
@@ -17,9 +18,11 @@
             e.preventDefault()
 
             $.get(e.currentTarget.href, (data) => {
-                $('#user-container').append(`<p><strong>${data.name}<strong> likes:</p>`)
+                $('#cont_user_likes').children().remove()
+                $('#cont_user_likes').append(`<p>email: ${data.email}</br> <strong>${data.name}</strong>   likes:</p>`)
                 data.liked_items.forEach((item) => {
-	            $('#user-container').append(`<p>${item.item_name}</p>`)})
+	            $('#cont_user_likes').append(`<p>${item.item_name}</p>`)
+                })
             })
         })
     })

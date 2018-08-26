@@ -13,38 +13,40 @@ class Item {
 
 $(function() {
     
-    $("#index-click").click((e) => {
+    $('#index-item-container').click((e) => {
+        e.preventDefault()
+        if(e.target.tagName == "STRONG") {
+            $.get(`items/${e.target.parentElement.dataset.id}`, (data) => {
+                if($('#detach_item_form')[0]){
+                    $('#detach_item_form').click()
+                }
+                var a = $('#link-wrap')
+                var b = $('a#create_item').detach()
+                $('#link-text-del').remove
+                $('#link-wrap').html(`</br>${data}`)
+                $('#main-content').prepend(b)
+            })                    
+        }
+    })   
+    
+    $("#index-click").on('click', (e) => {
         $.get('/items', e.target.dataset, (data) => {
             var template = Handlebars.compile($('#item_index_template').html())
             var added_items = template(data)
             $('#index-click').detach()
             $('#index-item-container').prepend(added_items)
         }, 'json').done(() => {
-            $('#index-item-container').click((e) => {
-                e.preventDefault()
-                if(e.target.tagName == "STRONG") {
-                    $.get(`items/${e.target.parentElement.dataset.id}`, (data) => {
-                        if($('#detach_item_form')[0]){
-                            $('#detach_item_form').click()
-                        }
-                        var a = $('#link-wrap')
-                        var b = $('a#create_item').detach()
-                        $('#link-text-del').remove
-                        $('#link-wrap').html(`</br>${data}`)
-                        $('#main-content').prepend(b)
-                    })                    
-                }
-            })            
+         
         })
     })
-    $('#create_item').click((e) => {
+    $('#create_item').on('click', (e) => {
         e.preventDefault()
         $.get('/items/new', (data) => {
             var a = $('#create_item').detach()    
             $('#link-text-del').text('')
             $('#link-wrap').html(data)
             $('#main-content').prepend('<a href="#/" class="navlink" id="detach_item_form">detach new item form</a>')
-            $('#new_item_form_container').submit(a, function(e) {
+            $('#new_item_form_container').on('submit', a, function(e) {
                 e.preventDefault()
                 var template = Handlebars.compile($('#item_template').html())
                 $.post('/items', $('form#new_item').serialize(), (data) => {
@@ -58,7 +60,7 @@ $(function() {
                     $('#new_item_form_container').html(data.responseText)
                 })
             })           
-        $("#detach_item_form").click((e) => {
+        $("#detach_item_form").on('click', (e) => {
             e.preventDefault()
             $('form#new_item').detach()
             $('#title-delete').detach()
@@ -67,7 +69,7 @@ $(function() {
         })            
       })   
     })
-    $('#view_liked_items').click((e) => {
+    $('#view_liked_items').on('click', (e) => {
         e.preventDefault()
         $.get(e.target.href, (data) => {
             data.map((item) => {
