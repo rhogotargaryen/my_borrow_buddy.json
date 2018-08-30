@@ -45,17 +45,13 @@ class ItemsController < ApplicationController
 
   def show
     set_item
-    if request.env['PATH_INFO'].include?('user')
-      render :show, layout: false
-    end
+    render :show, layout: false if request.env['PATH_INFO'].include?('user')
     redirect_to items_path(message: 'item not found') if @item.nil?
   end
 
   def edit
     @item = Item.find_by(id: params[:id])
-    if @item.owner_id != current_user.id
-      redirect_to items_url(message: 'you do not have permission to edit that item')
-    end
+    redirect_to items_url(message: 'you do not have permission to edit that item') if @item.owner_id != current_user.id
   end
 
   def update

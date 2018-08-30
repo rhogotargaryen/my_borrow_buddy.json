@@ -9,7 +9,6 @@ class Item {
         var a =Handlebars.compile($('#item_template').html())
         return a(this)
     }
-    
 }
 
 Item.display_liked_items = (e) => {
@@ -28,6 +27,7 @@ Item.detach_form_present =
             $('#detach_item_form').click()
         }
     }
+    
 
 Item.get_item_and_display = 
     (e) => {
@@ -44,17 +44,19 @@ Item.get_item_and_display =
 Item.get_items_and_mlinks = (e) => {
     $.get('/items', e.target.dataset, (data) => {
         var template = Handlebars.compile($('#item_index_template').html())
+        data.reverse()  // JSON returns by ID this reverse so chronologically newly creted items are displayed first, looks best
         var added_items = template(data)
         $('#index-click').detach()
+        $('#index-item-container').children().remove()
         $('#index-item-container').prepend(added_items)
     }, 'json')
 }
 
 $(function() {
-    
     $('#index-item-container').click((e) => {
         e.preventDefault()
         if(e.target.tagName == "STRONG") {
+            Item.detach_form_present()
             Item.get_item_and_display(e)
         }
     })   
@@ -66,7 +68,7 @@ $(function() {
     $('#create_item').on('click', (e) => {
         e.preventDefault()
         $.get('/items/new', (data) => {
-            var a = $('#create_item').detach()    
+            var a = $('#create_item').detach()
             $('#link-text-del').text('')
             $('#link-wrap').html(data)
             $('#main-content').prepend('<a href="#/" class="navlink" id="detach_item_form">detach new item form</a>')
