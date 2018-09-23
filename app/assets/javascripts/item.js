@@ -53,6 +53,30 @@ Item.get_items_and_mlinks = (e) => {
 }
 
 $(function() {
+    
+    $('#alpha').click((e) => {
+        e.preventDefault()
+        $.get(`/users/${e.target.dataset.id}/items`, (data) => {
+            data.sort((a, b) => {
+                 var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                 var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                 if (nameA < nameB) {
+                   return -1;
+                 }
+                 if (nameA > nameB) {
+                   return 1;
+                 }
+
+                 // names must be equal
+                 return 0;
+                })
+            var template = Handlebars.compile($('#item_index_template').html())
+            var added_items = template(data)
+            $('#index-click').detach()
+            $('#index-item-container').children().remove()
+            $('#index-item-container').prepend(added_items)
+            }, 'json')
+    })
     $('#index-item-container').click((e) => {
         e.preventDefault()
         if(e.target.tagName == "STRONG") {
